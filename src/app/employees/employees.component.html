@@ -1,0 +1,121 @@
+<div class="mt-4 container">
+  <button
+    class="btn btn-secondary"
+    data-bs-toggle="modal"
+    data-bs-target="#addEmployeeModal"
+  >
+    Add New Employee
+  </button>
+
+  <!-- Modal -->
+  <div
+    class="modal fade"
+    id="addEmployeeModal"
+    tabindex="-1"
+    aria-labelledby="addEmployeeModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="addEmployeeModalLabel">
+            Add Employee
+          </h1>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body">
+          <form #addEmployeeForm="ngForm" (ngSubmit)="addEmployeeForm.form.valid && onSubmit()">
+            <div class="mb-3">
+              <label for="id" class="form-label">ID</label>
+              <input
+                type="number"
+                class="form-control"
+                id="id"
+                [(ngModel)]="employeeModel.id"
+                name="id"
+                #id="ngModel"
+                required
+              />
+            </div>
+            <div class="mb-3">
+              <label for="first_name" class="form-label">First Name</label>
+              <input
+                type="text"
+                class="form-control"
+                id="first_name"
+                [(ngModel)]="employeeModel.first_name"
+                name="first_name"
+                #first_name="ngModel"
+                required
+              />
+            </div>
+            <div class="mb-3">
+              <label for="last_name" class="form-label">Last Name</label>
+              <input
+                type="text"
+                class="form-control"
+                id="last_name"
+                [(ngModel)]="employeeModel.last_name"
+                name="last_name"
+                #last_name="ngModel"
+                required
+              />
+            </div>
+            <div class="mb-3">
+              <label for="email" class="form-label">Email</label>
+              <input
+                type="email"
+                class="form-control"
+                id="email"
+                [(ngModel)]="employeeModel.email"
+                name="email"
+                #email="ngModel"
+                required
+              />
+            </div>
+            <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Submit</button>
+            <button
+              type="button"
+              class="mx-4 btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Employee details table -->
+  <table class="mt-4 table table-light">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">First Name</th>
+        <th scope="col">Last Name</th>
+        <th scope="col">Email</th>
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let employee of employees">
+        <th scope="row">{{ employee.id }}</th>
+        <td>{{ employee.first_name }}</td>
+        <td>{{ employee.last_name }}</td>
+        <td>{{ employee.email }}</td>
+        <td>
+          <button class="btn btn-secondary" (click)="onDetailsShow(employee.id)">View Details</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<router-outlet></router-outlet>

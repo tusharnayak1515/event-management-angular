@@ -1,0 +1,140 @@
+<div class="w-100 mt-4 container">
+  <div class="card" *ngIf="employee">
+    <div class="card-header p-3">
+      Details of <b>{{ employee.first_name }} {{ employee.last_name }}</b>
+    </div>
+    <ul class="list-group list-group-flush">
+      <li
+        class="list-group-item d-flex flex-row justify-content-between align-items-center"
+      >
+        <b>Employee Id</b>
+        <p>{{ employee.id }}</p>
+      </li>
+      <li
+        class="list-group-item d-flex flex-row justify-content-between align-items-center"
+      >
+        <b>Employee First Name</b>
+        <p>{{ employee.first_name }}</p>
+      </li>
+      <li
+        class="list-group-item d-flex flex-row justify-content-between align-items-center"
+      >
+        <b>Employee Last Name</b>
+        <p>{{ employee.last_name }}</p>
+      </li>
+      <li
+        class="list-group-item d-flex flex-row justify-content-between align-items-center"
+      >
+        <b>Employee Email</b>
+        <p>{{ employee.email }}</p>
+      </li>
+    </ul>
+    <div class="card-footer d-flex flex-row p-3">
+      <a routerLink="/employees" class="btn btn-primary">Employee List</a>
+      <button
+        class="btn btn-danger mx-4"
+        (click)="onEmployeeDelete(employee.id)"
+      >
+        Delete
+      </button>
+      <button
+        class="btn btn-secondary"
+        data-bs-toggle="modal"
+        data-bs-target="#updateEmployeeModal"
+      >
+        Update
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Update employee Modal -->
+<div
+  *ngIf="employee"
+  class="modal fade"
+  id="updateEmployeeModal"
+  tabindex="-1"
+  aria-labelledby="updateEmployeeModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="updateEmployeeModalLabel">
+          Update Employee
+        </h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <form
+          #updateEmployeeForm="ngForm"
+          (ngSubmit)="updateEmployeeForm.form.valid && onEmployeeUpdate()"
+        >
+          <div class="mb-3">
+            <label for="id" class="form-label">ID</label>
+            <input
+              type="number"
+              class="form-control"
+              id="id"
+              [(ngModel)]="employee.id"
+              name="id"
+              #id="ngModel"
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <label for="first_name" class="form-label">First Name</label>
+            <input
+              type="text"
+              class="form-control"
+              id="first_name"
+              [(ngModel)]="employee.first_name"
+              name="first_name"
+              #first_name="ngModel"
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <label for="last_name" class="form-label">Last Name</label>
+            <input
+              type="text"
+              class="form-control"
+              id="last_name"
+              [(ngModel)]="employee.last_name"
+              name="last_name"
+              #last_name="ngModel"
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input
+              type="email"
+              class="form-control"
+              id="email"
+              [(ngModel)]="employee.email"
+              name="email"
+              #email="ngModel"
+              required
+            />
+          </div>
+          <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">
+            Submit
+          </button>
+          <button
+            type="button"
+            class="mx-4 btn btn-secondary"
+            data-bs-dismiss="modal"
+          >
+            Close
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
