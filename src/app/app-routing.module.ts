@@ -4,6 +4,7 @@ import { EmployeesComponent } from './employees/employees.component';
 import { LoginComponent } from './login/login.component';
 import { EmployeeComponent } from './employee/employee.component';
 import { ChangepasswordComponent } from './changepassword/changepassword.component';
+import { authGuard } from './auth.guard';
 
 const routes: Routes = [
   {
@@ -14,18 +15,21 @@ const routes: Routes = [
   {
     path: "employees",
     component: EmployeesComponent,
+    canActivate: [authGuard]
   },
   {
     path: "employees/:id",
     component: EmployeeComponent,
+    canActivate: [authGuard]
   },
   {
     path: "login",
-    component: LoginComponent
+    component: LoginComponent,
   },
   {
     path: "change-password",
-    component: ChangepasswordComponent
+    component: ChangepasswordComponent,
+    canActivate: [authGuard]
   },
 ];
 
