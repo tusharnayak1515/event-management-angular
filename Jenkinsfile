@@ -8,12 +8,6 @@ pipeline {
 
     stages {
 
-        stage('Checkout') {
-            steps {
-                bat 'git clone https://github.com/tusharnayak1515/event-management-angular.git'
-            }
-        }
-
         stage('Build Angular App') {
             steps {
                 bat 'cd ./'
