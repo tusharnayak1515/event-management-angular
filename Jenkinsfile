@@ -1,6 +1,11 @@
 pipeline {
     agent any
 
+    parameters {
+        booleanParam(name: 'DOCKER_BUILD', defaultValue: true, description: 'Build Docker Image')
+        booleanParam(name: 'DOCKER_DEPLOY', defaultValue: true, description: 'Deploy to Docker Swarm')
+    }
+
     stages {
 
         stage('Checkout') {
@@ -20,12 +25,22 @@ pipeline {
         }
 
         stage('Build Docker Image') {
+            when {
+                expression {
+                    params.DOCKER_BUILD == true
+                }
+            }
             steps {
                 bat 'docker build -t demo-angular-docker:latest .'
             }
         }
 
         stage('Deploy to Docker Swarm') {
+            when {
+                expression {
+                    params.DOCKER_DEPLOY == true
+                }
+            }
             steps {
                 bat 'docker service create --name angular-docker-service --replicas 3 --publish published=4200,target=4200 demo-angular-docker:latest'
             }
