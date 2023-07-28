@@ -15,7 +15,7 @@ pipeline {
                 }
             }
             steps {
-                bat 'docker build -t demo-angular-docker:latest .'
+                bat 'docker build -t demo-angular-docker .'
             }
         }
 
@@ -27,7 +27,7 @@ pipeline {
                 }
             }
             steps {
-                bat 'docker service create --name angular-docker-service --replicas 3 --publish published=4200,target=4500 demo-angular-docker:latest'
+                bat 'docker service create --name angular-docker-service --replicas 3 --publish published=4200,target=4500 demo-angular-docker'
             }
         }
     }
