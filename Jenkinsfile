@@ -28,7 +28,7 @@ pipeline {
             }
             steps {
                 bat 'docker service rm angular-docker-service'
-                bat 'docker service create --name angular-docker-service --replicas 3 --publish mode=host published=4200,target=4500 demo-angular-docker:latest'
+                bat 'docker service create --name angular-docker-service --replicas 3 --publish published=4200,target=4500 demo-angular-docker:latest'
             }
         }
     }
