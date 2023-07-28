@@ -18,6 +18,7 @@ pipeline {
                 bat 'docker build -t demo-angular-docker:latest .'
             }
         }
+        
 
         stage('Deploy to Docker Swarm') {
             when {
