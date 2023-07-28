@@ -8,16 +8,6 @@ pipeline {
 
     stages {
 
-        stage('Build Angular App') {
-            steps {
-                bat 'cd ./'
-
-                bat 'npm install'
-
-                bat 'npm run build'
-            }
-        }
-
         stage('Build Docker Image') {
             when {
                 expression {
